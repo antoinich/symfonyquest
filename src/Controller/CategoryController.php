@@ -21,7 +21,7 @@ class CategoryController extends AbstractController
      * @Route("/category", name="blog_index")
      * @return Response A response instance
      */
-    public function add(Request, $request, EntityManagerInterface, $entityManager) : Response
+    public function add(Request $request, EntityManagerInterface $entityManager) : Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
