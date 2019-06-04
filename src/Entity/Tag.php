@@ -43,6 +43,12 @@ class Tag
         return $this->name;
     }
 
+    public function getSelector() : string
+    {
+        return $this->getId() . ' - ' . $this->getName();
+    }
+
+
     public function setName(string $name): self
     {
         $this->name = $name;
