@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Tag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -108,4 +109,17 @@ class BlogController extends AbstractController
                 'articles'=>$category->getArticles(),]
             );
         }
+    /**
+     * @Route("/tag/{name}", name="show_tag", methods={"GET"})
+     */
+    public function showByTag(Tag $tag) :Response
+    {
+        return $this->render(
+            'blog/tag.html.twig',
+            [
+                'tagName' => $tag->getName(),
+                'articles' => $tag->getArticles(),
+            ]
+        );
+    }
 }
