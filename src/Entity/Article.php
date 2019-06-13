@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraint as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -20,11 +21,20 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
+     * @Assert\Length(max="255")
+     * @Assert\Unique(message="Le titre {{value}} existe déjà, veuillez enchoisir un autre")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     *     pattern="/digital/",
+     *     match=false,
+     *     message="en français, il faut dire numérique")
      */
     private $content;
 
