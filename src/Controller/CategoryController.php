@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 use App\Form\CategoryType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 class CategoryController extends AbstractController
@@ -20,6 +21,7 @@ class CategoryController extends AbstractController
      *
      * @Route("/category", name="blog_index")
      * @return Response A response instance
+     * @IsGranted("ROLE_ADMIN")
      */
     public function add(Request $request, EntityManagerInterface $entityManager) : Response
     {
