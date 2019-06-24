@@ -24,7 +24,7 @@ class ArticleController extends AbstractController
     public function index(ArticleRepository $articleRepository): Response
     {
         return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articleRepository->findAllWithTags(),
         ]);
     }
 
@@ -51,6 +51,8 @@ class ArticleController extends AbstractController
                 ->setBody($this->render('email/articleNotification.html.twig',[
                     'article'=> $article]),'text/html');
             $mailer->send($message);
+
+            $this->addFlash('success', 'The new article has been created');
 
             return $this->redirectToRoute('article_index');
         }

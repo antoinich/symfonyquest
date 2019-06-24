@@ -5,10 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraint as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
+ * @UniqueEntity("title")
  */
 class Article
 {
@@ -21,16 +23,15 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull()
+     * @Assert\NotNull
      * @Assert\Length(max="255")
-     * @Assert\Unique(message="Le titre {{value}} existe déjà, veuillez enchoisir un autre")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotNull()
-     * @Assert\NotBlank()
+     * @Assert\NotNull
+     * @Assert\NotBlank
      * @Assert\Regex(
      *     pattern="/digital/",
      *     match=false,

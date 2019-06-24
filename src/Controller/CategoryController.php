@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Article;
 use App\Form\CategoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
@@ -32,6 +31,8 @@ class CategoryController extends AbstractController
         if($form->isSubmitted()){
             $entityManager->persist($category);
             $entityManager->flush();
+
+            $this->addFlash('success', 'The category has been edited');
         }
 
         return $this->render(
@@ -41,5 +42,7 @@ class CategoryController extends AbstractController
             ]
         );
     }
+
+
 
 }
